@@ -1,12 +1,16 @@
-import './App.css';
-let nam = "Karan";
+import About from "./components/About";
+import Navbar from "./components/Navbar";
+import TextForm from "./TextForm";
+
 function App() {
   return (
-   <>
-   <div className="app">
-      <h1>hello {nam}</h1>
-   </div>
-   </>
+    <>
+      <Navbar title="TextUtils" aboutText="About"></Navbar>
+      <div className="container">
+        {/* <TextForm heading="Enter the text to analyze"></TextForm> */}
+      <About/>
+      </div>
+    </>
   );
 }
 
