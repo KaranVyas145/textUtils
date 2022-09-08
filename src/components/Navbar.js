@@ -1,10 +1,12 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export default function Navbar(props) {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav
+        className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}
+      >
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             {props.title}
@@ -33,17 +35,35 @@ export default function Navbar(props) {
                 </a>
               </li>
             </ul>
-            <form className="d-flex" role="search">
+            <form className="d-flex mx-2" role="search">
               <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               ></input>
-              <button className="btn btn-outline-light" type="submit">
+              <button className={`btn btn-outline-${
+                  props.mode === "dark" ? "light" : "dark"
+                }`} type="submit">
                 Search
               </button>
             </form>
+            <div className="form-check form-switch">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckDefault"
+                onClick={props.toggleMode}
+              />
+              <label
+                className={`form-check-label text-${
+                  props.mode === "dark" ? "light" : "dark"
+                }`}
+              >
+                Dark Mode
+              </label>
+            </div>
           </div>
         </div>
       </nav>
@@ -52,11 +72,11 @@ export default function Navbar(props) {
 }
 
 Navbar.propTypes = {
-    title: PropTypes.string.isRequired,
-    aboutText: PropTypes.string
-}
+  title: PropTypes.string.isRequired,
+  aboutText: PropTypes.string,
+};
 
 Navbar.defaultProps = {
-    title: "Set title here",
-    aboutText: "Set about here"
-}
+  title: "Set title here",
+  aboutText: "Set about here",
+};

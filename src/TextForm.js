@@ -1,18 +1,37 @@
 import React, { useState } from "react";
 
 function TextForm(props) {
+  // the main text state
   const [text, setText] = useState("");
+
+  //   function to convert the text in textbox to uppercase
   const handleUpCLick = () => {
     let newText = text.toUpperCase();
     setText(newText);
   };
 
+  //   function to convert the text in textbox to lowercase
   const handleLowClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
   };
+
+  //   function to clear the text in textbox
   const handleClCLick = () => {
     setText("");
+  };
+
+  //   function to copy the text to clipboard
+  const handleCpyCLick = () => {
+    let newText = text;
+    navigator.clipboard.writeText(newText);
+  };
+
+  const handleExSpcCLick = () => {
+    let newText = text;
+    newText = newText.replace(/\s+/g, " ").trim();
+    setText(newText);
+    console.log(text);
   };
 
   const handleOnChange = (event) => {
@@ -20,7 +39,10 @@ function TextForm(props) {
   };
   return (
     <>
-      <div className="container">
+      <div
+        className="container"
+        style={{ color: props.mode === "light" ? "black" : "white" }}
+      >
         <h1>{props.heading}</h1>
         <div className="mb-3 my-3">
           <textarea
@@ -29,19 +51,29 @@ function TextForm(props) {
             rows="8"
             value={text}
             onChange={handleOnChange}
+            style={{
+              color: props.mode === "light" ? "black" : "white",
+              backgroundColor: props.mode === "light" ? "white" : "grey",
+            }}
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-2" onClick={handleUpCLick}>
+        <button className="btn btn-primary m-2" onClick={handleUpCLick}>
           Convert to Uppercase
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleLowClick}>
+        <button className="btn btn-primary m-2" onClick={handleLowClick}>
           Convert to Lowercase
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleClCLick}>
+        <button className="btn btn-primary m-2" onClick={handleClCLick}>
           Clear Text
         </button>
+        <button className="btn btn-primary m-2" onClick={handleCpyCLick}>
+          Copy Text
+        </button>
+        <button className="btn btn-primary m-2" onClick={handleExSpcCLick}>
+          Remove extra spaces
+        </button>
       </div>
-      <div className="container">
+      <div className="container" style={{ color: props.mode === "light" ? "black" : "white" }}>
         <h2>Your text summary</h2>
         <p>
           {text.length === 0 ? 0 : text.split(" ").length} words and{" "}
