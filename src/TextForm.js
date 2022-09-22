@@ -8,23 +8,28 @@ function TextForm(props) {
   const handleUpCLick = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to uppercase", "success");
   };
 
   //   function to convert the text in textbox to lowercase
   const handleLowClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Converted to lowercase", "success");
   };
 
   //   function to clear the text in textbox
   const handleClCLick = () => {
     setText("");
+    props.showAlert("Cleared the text", "success");
   };
 
   //   function to copy the text to clipboard
   const handleCpyCLick = () => {
     let newText = text;
     navigator.clipboard.writeText(newText);
+    props.showAlert("Converted to uppercase", "success");
+    props.showAlert("Text copied", "success");
   };
 
   const handleExSpcCLick = () => {
@@ -32,15 +37,17 @@ function TextForm(props) {
     newText = newText.replace(/\s+/g, " ").trim();
     setText(newText);
     console.log(text);
+    props.showAlert("Extra spaces cleared","success");
   };
 
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
+
   return (
     <>
       <div
-        className="container"
+        className="container mt-5"
         style={{ color: props.mode === "light" ? "black" : "white" }}
       >
         <h1>{props.heading}</h1>
@@ -73,7 +80,10 @@ function TextForm(props) {
           Remove extra spaces
         </button>
       </div>
-      <div className="container" style={{ color: props.mode === "light" ? "black" : "white" }}>
+      <div
+        className="container"
+        style={{ color: props.mode === "light" ? "black" : "white" }}
+      >
         <h2>Your text summary</h2>
         <p>
           {text.length === 0 ? 0 : text.split(" ").length} words and{" "}

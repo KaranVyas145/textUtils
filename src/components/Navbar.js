@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Navbar(props) {
   return (
@@ -25,14 +26,25 @@ export default function Navbar(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                  aria-current="page"
+                  to="/"
+                >
                   Home
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                  to="/about"
+                >
                   {props.aboutText}
-                </a>
+                </NavLink>
               </li>
             </ul>
             <form className="d-flex mx-2" role="search">
@@ -42,9 +54,12 @@ export default function Navbar(props) {
                 placeholder="Search"
                 aria-label="Search"
               ></input>
-              <button className={`btn btn-outline-${
+              <button
+                className={`btn btn-outline-${
                   props.mode === "dark" ? "light" : "dark"
-                }`} type="submit">
+                }`}
+                type="submit"
+              >
                 Search
               </button>
             </form>
