@@ -1,33 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 
 function About(props) {
-  let [myStyle, setMyStyle] = useState({
-    color: "black",
-    backgroundColor: "white",
-    buttonText: "Enable Dark Mode",
-  });
-
-  const toggleStyle = () => {
-    if (myStyle.backgroundColor === "#212529") {
-      console.log(true);
-      setMyStyle({
-        color: "black",
-        backgroundColor: "white",
-        buttonText: "Enable Dark Mode",
-      });
-    } else {
-      setMyStyle({
-        color: "white",
-        backgroundColor: "#212529",
-        buttonText: "Disable Dark Mode",
-        border: "1px solid white",
-      });
-    }
+  let myStyle = {
+    color: props.mode === "light" ? "black" : "white",
+    backgroundColor: props.mode === "light" ? "white" : `rgb(35,74,104)`,
+    border: "1px solid white",
   };
 
   return (
-    <div className="container" style={myStyle}>
-      <h1 className="my-2">About Us</h1>
+    <div className="container">
+      <h1
+        className="my-2"
+        style={{ color: props.mode === "light" ? "black" : "white" }}
+      >
+        About Us
+      </h1>
       <div className="accordion" id="accordionExample">
         <div className="accordion-item">
           <h2 className="accordion-header" id="headingOne">
@@ -49,10 +36,7 @@ function About(props) {
             aria-labelledby="headingOne"
             data-bs-parent="#accordionExample"
           >
-            <div
-              className="accordion-body"
-              style={myStyle}
-            >
+            <div className="accordion-body" style={myStyle}>
               <strong>This is the first item's accordion body.</strong> It is
               shown by default, until the collapse plugin adds the appropriate
               classNamees that we use to style each element. These classNamees
@@ -128,11 +112,6 @@ function About(props) {
             </div>
           </div>
         </div>
-      </div>
-      <div className="container my-3">
-        <button onClick={toggleStyle} type="button" className="btn btn-primary">
-          {myStyle.buttonText}
-        </button>
       </div>
     </div>
   );
